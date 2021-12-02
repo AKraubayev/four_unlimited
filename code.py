@@ -1,3 +1,4 @@
+#comment of Daniil
 !pip install transformers
 from transformers import ViTFeatureExtractor, ViTForImageClassification
 from PIL import Image
