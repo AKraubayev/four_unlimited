@@ -5,5 +5,5 @@ Images are presented to the model as a sequence of fixed-size patches (resolutio
 
 By pre-training the model, it learns an inner representation of images that can then be used to extract features useful for downstream tasks: if you have a dataset of labeled images for instance, you can train a standard classifier by placing a linear layer on top of the pre-trained encoder. One typically places a linear layer on top of the [CLS] token, as the last hidden state of this token can be seen as a representation of an entire image.
 
-
+Hello poch all!!!
 https://colab.research.google.com/drive/1tH-U0tQI5Zn4O0_GqG85PyByyIIdasS1?usp=sharing
