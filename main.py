@@ -1,3 +1,3 @@
 print("Hello World!")
-
-print("Buy World")
+print('Hi Everyone')
+print('Bye Everyone')
