@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """ "ml_engineering_weapon_and_no.ipynb""
+
 Original file is located at
     https://colab.research.google.com/drive/145c7vHHGECzQp_X4vGuCBD0UIS_XmlIH
 ## Задание с хакатона осеннего семестра первого курса магистратуры "Инженерия машинного обучения":
@@ -167,6 +168,7 @@ def load_image():
 
 model = load_model()
 
+
 st.title('**Классификация оружия на изображении**')
 img = load_image()
 result = st.button('Распознать изображение')
@@ -192,4 +194,3 @@ if result:
     prediction = model.predict(x)
     x = prediction[0][0]
     st.write('**Результаты распознавания: \n **',sub + ", с вероятностью: " + print_percent(x))
-   
