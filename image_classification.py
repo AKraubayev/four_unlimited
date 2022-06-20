@@ -46,11 +46,14 @@ from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
 
 """## Загружаем датасеты """
-
+wget https://www.dropbox.com/s/dsltirre6hu724g/train.zip
+wget https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
+    
+    
 unzip -q train.zip
 unzip -q test.zip
 
-"""## Конструием функцию предобработки"""
+"""## Конструируем функцию предобработки"""
 
 def preprocess_image(img):
     img = img.resize((224, 224))
@@ -152,13 +155,13 @@ print("Доля верных ответов на тестовых данных, 
 """## Сохраняем модель"""
 
 
-model.save("/Models/ml_engineering_weapon_and_no")
+model.save("/ml_engineering_weapon_and_no")
 
 
 """### Определим функцию для последующей загрузки модели"""
 
 def load_model():
-    model = load_model("/Models/ml_engineering_weapon_and_no")
+    model = load_model("/ml_engineering_weapon_and_no")
     return model
 
 
