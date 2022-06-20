@@ -35,7 +35,6 @@ Original file is located at
 import os
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
 from tensorflow.keras import layers
 from tensorflow.keras import utils
 from tensorflow.keras.applications import EfficientNetB0
@@ -43,35 +42,11 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
-from google.colab import files
-%matplotlib inline 
 
-"""### Подключим Google Drive"""
-
-from google.colab import drive
-drive.mount('/content/drive')
-
-"""## Загружаем данные"""
-
-!wget https://www.dropbox.com/s/dsltirre6hu724g/train.zip
-
-!wget https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip?dl=0 -O test.zip
-
-!ls
-
-"""## Распаковываем архивы:"""
-
-!unzip -q train.zip
-
-!ls train
-
-!unzip -q test.zip
-
-!ls test
 
 """## Смотрим примеры картинок:"""
 
-img_path = '/content/train/weapon/File 1016.jpg'
+img_path = '/train/weapon/File 1016.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 plt.imshow(img)
 plt.show()
@@ -153,7 +128,7 @@ print("Доля верных ответов на тестовых данных, 
 
 """## Сохраняем модель"""
 
-model.save("drive/MyDrive/Models/ml_engineering_weapon_and_no")
+model.save("/Models/ml_engineering_weapon_and_no")
 
 
 """## Использование нейронной сети для распознавания изображений
@@ -165,7 +140,7 @@ class_names
 
 """Загружаем изображение из файла"""
 
-img_path = '/content/train/noweapon/File 1211.jpg'
+img_path = '/train/noweapon/File 1211.jpg'
 img = image.load_img(img_path, target_size=(224, 224))
 plt.imshow(img)
 plt.show()
