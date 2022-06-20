@@ -46,9 +46,10 @@ import matplotlib.pyplot as plt
 from google.colab import files
 %matplotlib inline 
 
-"""###Подключим Google Drive"""
+"""### Подключим Google Drive"""
 
-
+from google.colab import drive
+drive.mount('/content/drive')
 
 """## Загружаем данные"""
 
@@ -149,6 +150,11 @@ history = model.fit(train_dataset,
 scores = model.evaluate(test_dataset, verbose=1)
 
 print("Доля верных ответов на тестовых данных, в процентах:", round(scores[1] * 100, 4))
+
+"""## Сохраняем модель"""
+
+model.save("drive/MyDrive/Models/ml_engineering_weapon_and_no")
+
 
 """## Использование нейронной сети для распознавания изображений
 
