@@ -1,9 +1,13 @@
-Model description
-The Vision Transformer (ViT) is a transformer encoder model (BERT-like) pretrained on a large collection of images in a supervised fashion, namely ImageNet-21k, at a resolution of 224x224 pixels. Next, the model was fine-tuned on ImageNet (also referred to as ILSVRC2012), a dataset comprising 1 million images and 1,000 classes, also at resolution 224x224.
+# Приложение с использованием машинного обучения "Распознавание оружия на фото" для развертывания на облачных платформах
 
-Images are presented to the model as a sequence of fixed-size patches (resolution 16x16), which are linearly embedded. One also adds a [CLS] token to the beginning of a sequence to use it for classification tasks. One also adds absolute position embeddings before feeding the sequence to the layers of the Transformer encoder.
+Web-приложение для распознавания наличия оружия на фото.Так же сеть может распознавать людей с оружием! [image](https://user-images.githubusercontent.com/92274248/174191304-49957058-57c0-4d5c-9b66-57fa30b4f414.png)
+. Используются библиотеки:
 
-By pre-training the model, it learns an inner representation of images that can then be used to extract features useful for downstream tasks: if you have a dataset of labeled images for instance, you can train a standard classifier by placing a linear layer on top of the pre-trained encoder. One typically places a linear layer on top of the [CLS] token, as the last hidden state of this token can be seen as a representation of an entire image.
+- [TensorFlow](https://www.tensorflow.org/).
+- [Streamlit](https://streamlit.io/).
 
-Hello poch all!!!
-https://colab.research.google.com/drive/1tH-U0tQI5Zn4O0_GqG85PyByyIIdasS1?usp=sharing
+Для распознавания изображений используется нейронная сеть [EfficientNetB0](https://keras.io/api/applications/efficientnet/#efficientnetb0-function). Подробности о модели в статье:
+
+- [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/abs/1905.11946).
+
+[Ссылка на развернутое приложение](https://image-classification-demo.herokuapp.com/).
