@@ -51,8 +51,8 @@ import matplotlib.pyplot as plt
 """## Загружаем датасеты """
 
 
-url_train = '//www.dropbox.com/s/dsltirre6hu724g/train.zip'
-url_test = '//www.dropbox.com/s/tuyavsee0i6oqhy/test.zip'
+url_train = 'https://www.dropbox.com/s/dsltirre6hu724g/train.zip'
+url_test = 'https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip'
 
 
 r_train = requests.get(url_train)
@@ -64,8 +64,10 @@ with open("train.zip", "wb") as code:
     code.write(r_train.content)
     
     
+with open("test.zip", "wb") as code:
+    code.write(r_test.content)
     
-    
+     
 unzip -q train.zip
 unzip -q test.zip
 
