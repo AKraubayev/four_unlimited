@@ -37,6 +37,8 @@ import numpy as np
 import tensorflow as tf
 import streamlit as st
 from PIL import Image
+import requests
+import urllib
 from tensorflow.keras import layers
 from tensorflow.keras import utils
 from tensorflow.keras.applications import EfficientNetB0
@@ -45,9 +47,23 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
 
+
 """## Загружаем датасеты """
-curl -f -L -o https://www.dropbox.com/s/dsltirre6hu724g/train.zip
-curl -f -L -o https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
+
+
+url_train = '//www.dropbox.com/s/dsltirre6hu724g/train.zip'
+url_test = '//www.dropbox.com/s/tuyavsee0i6oqhy/test.zip'
+
+
+r_train = requests.get(url_train)
+r_test = requests.get(url_test)
+
+
+
+with open("train.zip", "wb") as code:
+    code.write(r_train.content)
+    
+    
     
     
 unzip -q train.zip
