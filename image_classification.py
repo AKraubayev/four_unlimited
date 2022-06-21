@@ -46,8 +46,8 @@ from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
 
 """## Загружаем датасеты """
-wget -O train.zip https://www.dropbox.com/s/dsltirre6hu724g/train.zip
-wget -O test.zip https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
+curl -f -L -o https://www.dropbox.com/s/dsltirre6hu724g/train.zip
+curl -f -L -o https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
     
     
 unzip -q train.zip
