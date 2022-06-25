@@ -38,7 +38,7 @@ def test_civilian_image():
 
  def test_weapon_image():
     # Загрузка и преобразование изображения оружия
-    img_path = '/content/train/weapon/File 1016.jpg'
+    img_path = '/train/weapon/File 1016.jpg'
     img = image.load_img(img_path)
     x = preprocess_image(img)
     
