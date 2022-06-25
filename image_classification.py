@@ -19,6 +19,7 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 import io
+import wget
 #import os
 import numpy as np
 import tensorflow as tf
@@ -34,10 +35,13 @@ import matplotlib.pyplot as plt
 
 """## Загружаем датасеты """
 
+wget https://www.dropbox.com/s/dsltirre6hu724g/train.zip
+wget https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
+
 unzip -q train.zip
 unzip -q test.zip
 
-"""## Конструием функцию предобработки"""
+"""## Конструируем функцию предобработки"""
 
 def preprocess_image(img):
     img = img.resize((224, 224))
@@ -163,10 +167,10 @@ def load_image():
         return None
 
 
-"""Запускаем предобработку и распознавание"""
+"""##Запускаем предобработку и распознавание"""
 
 
-model = load_model()
+#model = load_model()
 
 
 st.title('**Классификация оружия на изображении**')
