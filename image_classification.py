@@ -129,8 +129,11 @@ model.compile(loss='binary_crossentropy',
 history = model.fit(train_dataset,
                     epochs=10)
 
-"""Проверяем качество обучения на тестовом наборе данных
-"""
+"""##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
+
+
+
+model = load_model("/Models/ml_engineering_weapon_and_no")
 
 scores = model.evaluate(test_dataset, verbose=1)
 
@@ -141,14 +144,14 @@ print("Доля верных ответов на тестовых данных, 
 """## Сохраняем модель"""
 
 
-model.save("/Models/ml_engineering_weapon_and_no")
+#model.save("/Models/ml_engineering_weapon_and_no")
 
 
 """### Определим функцию для последующей загрузки модели"""
 
-def load_model():
-    model = load_model("/Models/ml_engineering_weapon_and_no")
-    return model
+#def load_model():
+    #model = load_model("/Models/ml_engineering_weapon_and_no")
+    #return model
 
 
 """## Использование нейронной сети для распознавания изображений"""
