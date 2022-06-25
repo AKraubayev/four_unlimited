@@ -43,7 +43,7 @@ def test_civilian_image():
     x = preprocess_image(img)
     
     # Загрузка модели
-    model = load_model("/Models/ml_engineering_weapon_and_no")
+    model = load_model("/Models/ml_engineering_weapon_and_no/")
         
     pred = model.predict(x)
     assert pred > 0.9
