@@ -1,0 +1,4 @@
+[core]
+    remote = myremote
+['remote "myremote"']
+    url = https://www.dropbox.com/scl/fo/6v9lf7ea1mw2iux54282h/h
