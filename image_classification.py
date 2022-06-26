@@ -43,7 +43,6 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
-import matplotlib.pyplot as plt
 
 
 """## Конструируем функцию предобработки"""
@@ -60,13 +59,6 @@ trg_s = (224, 224)
 img_s = (224, 224)
 batch_s = 128
 
-
-"""## Смотрим примеры картинок:"""
-
-img_path = '/train/weapon/File 1016.jpg'
-img = image.load_img(img_path, target_size=trg_s)
-plt.imshow(img)
-plt.show()
 
 """## Создаем наборы данных
 Набор данных для обучения
