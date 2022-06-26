@@ -19,6 +19,7 @@ Original file is located at
 
 # Commented out IPython magic to ensure Python compatibility.
 import io
+import urllib.request
 import wget
 #import os
 import numpy as np
@@ -49,43 +50,20 @@ img_s = (224, 224)
 batch_s = 128
 
 
-"""## Смотрим примеры картинок:"""
-
-img_path = '/train/weapon/File 1016.jpg'
-img = image.load_img(img_path, target_size=trg_s)
-plt.imshow(img)
-plt.show()
-
-"""## Создаем наборы данных
-Набор данных для обучения
-"""
-
-train_dataset = image_dataset_from_directory('train',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
-class_names = train_dataset.class_names
-
-
-"""Набор данных для тестирования"""
-
-test_dataset = image_dataset_from_directory('test',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
-
-"""##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
-
-model = load_model("/Models/ml_engineering_weapon_and_no")
-
-
-scores = model.evaluate(test_dataset, verbose=1)
-
-
-print("Доля верных ответов на тестовых данных, в процентах:", round(scores[1] * 100, 4))
-
-
 """# Использование нейронной сети для распознавания изображений"""
+"""## Загружаем предобученную модель"""
+
+url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
+mkdir /Models
+urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
+unzip -q /Models/ml_engineering_weapon_and_no.zip
+
+def load_trained_model():
+    model = load_model("/Models/ml_engineering_weapon_and_no")
+    return model
+
+
+model = load_trained_model()
 
 
 """##Загружаем изображение из файла в StreamLit"""
@@ -102,9 +80,6 @@ def load_image():
 
 
 """##Запускаем предобработку и распознавание"""
-
-
-#model = load_model()
 
 
 st.title('**Классификация оружия на изображении**')
