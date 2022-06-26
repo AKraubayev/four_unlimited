@@ -60,33 +60,10 @@ img_s = (224, 224)
 batch_s = 128
 
 
-"""## Создаем наборы данных
-Набор данных для обучения
-"""
-
-train_dataset = image_dataset_from_directory('train',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
-class_names = train_dataset.class_names
-
-
-"""Набор данных для тестирования"""
-
-test_dataset = image_dataset_from_directory('test',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
 
 """##Загружаем обученную на датасете модель и проверяем качество обучения на тестовом наборе данных"""
 
 model = load_model("/Models/ml_engineering_weapon_and_no")
-
-
-scores = model.evaluate(test_dataset, verbose=1)
-
-
-print("Доля верных ответов на тестовых данных, в процентах:", round(scores[1] * 100, 4))
 
 
 """# Использование нейронной сети для распознавания изображений"""
