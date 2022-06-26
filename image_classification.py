@@ -30,7 +30,7 @@ Original file is located at
 ## Подключаем библиотеки:
 """
 
-pip install unzip
+pip3 install unzip
 import io
 #import os
 import numpy as np
