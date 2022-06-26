@@ -7,6 +7,7 @@ from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
+from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 
 
 def preprocess_image(img):
