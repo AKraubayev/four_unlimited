@@ -29,8 +29,9 @@ Original file is located at
 
 ## Подключаем библиотеки:
 """
-
+pip install zip
 import io
+import urllib.request
 #import os
 import numpy as np
 import tensorflow as tf
@@ -63,6 +64,10 @@ batch_s = 128
 
 """##Загружаем обученную на датасете модель и проверяем качество обучения на тестовом наборе данных"""
 
+url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
+mkdir Models
+urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
+unzip ml_engineering_weapon_and_no.zip -d /Models
 model = load_model("/Models/ml_engineering_weapon_and_no")
 
 
