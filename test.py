@@ -10,9 +10,6 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 
 
-print("Hello this linter work!")
-
-
 def preprocess_image(img):
     img = img.resize((224, 224))
     x = image.img_to_array(img)
