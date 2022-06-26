@@ -17,18 +17,14 @@ def preprocess_image(img):
     x = preprocess_input(x)
     return x
 
+model = load_model("/Models/ml_engineering_weapon_and_no/")
 
 def test_civilian_image():
     # Загрузка и преобразование изображения не оружия
     img_path = '/train/noweapon/File 1710.jpg'
     img = image.load_img(img_path)
     x = preprocess_image(img)
-    
-    
-    # Загрузка модели
-model = load_model("/Models/ml_engineering_weapon_and_no/")
-        
-pred = model.predict(x)
+    pred = model.predict(x)
     assert pred < 0.2
 
 
@@ -37,9 +33,5 @@ def test_weapon_image():
     img_path = '/train/weapon/File 1016.jpg'
     img = image.load_img(img_path)
     x = preprocess_image(img)
-    
-    # Загрузка модели
-model = load_model("/Models/ml_engineering_weapon_and_no/")
-        
-pred = model.predict(x)
+    pred = model.predict(x)
     assert pred > 0.9
