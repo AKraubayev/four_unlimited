@@ -88,7 +88,7 @@ test_dataset = image_dataset_from_directory('test',
 
 """##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
 
-unzip /Models/ml_engineering_weapon_and_no.zip -d /Models/
+unzip /Models/ml_engineering_weapon_and_no.zip -d /Models/ml_engineering_weapon_and_no
 model = load_model("/Models/ml_engineering_weapon_and_no")
 
 
