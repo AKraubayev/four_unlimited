@@ -29,7 +29,6 @@ Original file is located at
 
 ## Подключаем библиотеки:
 """
-pip install zip
 import io
 import urllib.request
 #import os
