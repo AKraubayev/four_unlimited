@@ -5,6 +5,7 @@ Web-приложение для распознавания наличия ору
 
 - [TensorFlow](https://www.tensorflow.org/).
 - [Streamlit](https://streamlit.io/).
+- [Keras](https://keras.io/).
 
 Для распознавания изображений используется нейронная сеть [EfficientNetB0](https://keras.io/api/applications/efficientnet/#efficientnetb0-function). Подробности о модели в статье:
 
