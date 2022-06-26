@@ -30,7 +30,6 @@ Original file is located at
 ## Подключаем библиотеки:
 """
 
-pip3 install unzip
 import io
 #import os
 import numpy as np
@@ -86,9 +85,8 @@ test_dataset = image_dataset_from_directory('test',
                                              image_size=img_s)
 
 
-"""##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
+"""##Загружаем обученную на датасете модель и проверяем качество обучения на тестовом наборе данных"""
 
-unzip /Models/ml_engineering_weapon_and_no.zip -d /Models/ml_engineering_weapon_and_no
 model = load_model("/Models/ml_engineering_weapon_and_no")
 
 
@@ -115,9 +113,6 @@ def load_image():
 
 
 """##Запускаем предобработку и распознавание"""
-
-
-#model = load_model()
 
 
 st.title('**Классификация оружия на изображении**')
