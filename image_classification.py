@@ -30,15 +30,13 @@ Original file is located at
 ## Подключаем библиотеки:
 """
 
-# Commented out IPython magic to ensure Python compatibility.
 import io
+import wget
 #import os
 import numpy as np
 import tensorflow as tf
 import streamlit as st
 from PIL import Image
-import requests
-import urllib
 from tensorflow.keras import layers
 from tensorflow.keras import utils
 from tensorflow.keras.applications import EfficientNetB0
@@ -47,29 +45,6 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
 
-
-"""## Загружаем датасеты """
-
-
-url_train = 'https://www.dropbox.com/s/dsltirre6hu724g/train.zip'
-url_test = 'https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip'
-
-
-r_train = requests.get(url_train)
-r_test = requests.get(url_test)
-
-
-
-with open("train.zip", "wb") as code:
-    code.write(r_train.content)
-    
-    
-with open("test.zip", "wb") as code:
-    code.write(r_test.content)
-    
-     
-unzip -q train.zip
-unzip -q test.zip
 
 """## Конструируем функцию предобработки"""
 
@@ -94,7 +69,6 @@ plt.imshow(img)
 plt.show()
 
 """## Создаем наборы данных
-
 Набор данных для обучения
 """
 
@@ -104,7 +78,6 @@ train_dataset = image_dataset_from_directory('train',
 
 class_names = train_dataset.class_names
 
-class_names
 
 """Набор данных для тестирования"""
 
@@ -112,57 +85,11 @@ test_dataset = image_dataset_from_directory('test',
                                              batch_size=batch_s,
                                              image_size=img_s)
 
-"""## Создаем составную нейронную сеть"""
 
-img_augmentation = Sequential(
-    [
-        layers.RandomRotation(factor=0.15),
-        layers.RandomTranslation(height_factor=0.1, width_factor=0.1),
-        layers.RandomFlip(),
-        layers.RandomContrast(factor=0.1),
-    ],
-    name="img_augmentation",
-)
+"""##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
 
-inputs = layers.Input(shape=(224, 224, 3))
-x = img_augmentation(inputs)
-model = EfficientNetB0(include_top=False, input_tensor=x, weights="imagenet")
+model = load_model("/Models/ml_engineering_weapon_and_no")
 
-# Freeze the pretrained weights
-model.trainable = False
-
-# Rebuild top
-x = layers.GlobalAveragePooling2D(name="avg_pool")(model.output)
-x = layers.BatchNormalization()(x)
-
-top_dropout_rate = 0.2
-x = layers.Dropout(top_dropout_rate, name="top_dropout")(x)
-# Для задачи с двумя классами изображений
-outputs = layers.Dense(1, activation="sigmoid", name="pred")(x)
-# Для задачи с несколькими классами изображений
-# num_classes = 3 # Задаем количество классов
-# outputs = layers.Dense(num_classes, activation="softmax", name="pred")(x)
-model = tf.keras.Model(inputs, outputs, name="EfficientNet")
-
-"""Компилируем составную нейронную сеть"""
-
-# Для задачи с двумя классами изображений
-model.compile(loss='binary_crossentropy',
-              optimizer='adam', 
-              metrics=['accuracy'])
-# Для задачи с несколькими классами изображений
-# model.compile(loss='categorical_crossentropy',
-#              optimizer='adam', 
-#              metrics=['accuracy'])
-
-"""## Обучаем сеть"""
-
-history = model.fit(train_dataset,
-                    epochs=10)
-
-"""Проверяем качество обучения на тестовом наборе данных
-
-"""
 
 scores = model.evaluate(test_dataset, verbose=1)
 
@@ -170,23 +97,10 @@ scores = model.evaluate(test_dataset, verbose=1)
 print("Доля верных ответов на тестовых данных, в процентах:", round(scores[1] * 100, 4))
 
 
-"""## Сохраняем модель"""
+"""# Использование нейронной сети для распознавания изображений"""
 
 
-model.save("/ml_engineering_weapon_and_no")
-
-
-"""### Определим функцию для последующей загрузки модели"""
-
-def load_model():
-    model = load_model("/ml_engineering_weapon_and_no")
-    return model
-
-
-"""## Использование нейронной сети для распознавания изображений"""
-
-
-"""Загружаем изображение из файла в StreamLit"""
+"""##Загружаем изображение из файла в StreamLit"""
 
 
 def load_image():
@@ -199,10 +113,11 @@ def load_image():
         return None
 
 
-"""Запускаем предобработку и распознавание"""
+"""##Запускаем предобработку и распознавание"""
 
 
-model = load_model()
+#model = load_model()
+
 
 st.title('**Классификация оружия на изображении**')
 img = load_image()
@@ -214,13 +129,6 @@ def print_percent(t):
            }[1] + "%"
 
 
-sub = {
-   x > 0.5 : "Это оружие",
-   x == 0.5: "Не определено",
-   x  < 0.5 : "Это НЕ оружие"
-}[1]
-
-
 """Печатаем результаты распознавания"""
 
 
@@ -228,5 +136,9 @@ if result:
     x = preprocess_image(img)
     prediction = model.predict(x)
     x = prediction[0][0]
+        sub = {
+            x > 0.5 : "Это оружие",
+            x == 0.5: "Не определено",
+            x  < 0.5 : "Это НЕ оружие"
+                }[1]
     st.write('**Результаты распознавания: \n **',sub + ", с вероятностью: " + print_percent(x))
-    print_predictions(prediction)
