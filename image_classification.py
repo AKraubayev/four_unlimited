@@ -66,12 +66,17 @@ batch_s = 128
 url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
 mkdir /Models
 urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
-unzip ml_engineering_weapon_and_no.zip -d /Models
-model = load_model("/Models/ml_engineering_weapon_and_no")
+unzip -q /Models/ml_engineering_weapon_and_no.zip
+
+
+def load_trained_model():
+    model = load_model("/Models/ml_engineering_weapon_and_no")
+    return model
 
 
 """# Использование нейронной сети для распознавания изображений"""
 
+model = load_trained_model()
 
 """##Загружаем изображение из файла в StreamLit"""
 
