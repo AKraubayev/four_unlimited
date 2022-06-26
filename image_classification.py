@@ -29,10 +29,9 @@ Original file is located at
 
 ## Подключаем библиотеки:
 """
-pip intall wget
+
 pip install unzip
 import io
-import wget
 #import os
 import numpy as np
 import tensorflow as tf
