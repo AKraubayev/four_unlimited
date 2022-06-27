@@ -16,11 +16,8 @@ Original file is located at
 Архивы [Обучение] (train.zip) и [Тест] (test.zip) содержат все изображения, используемые для обучения и тестирования.В каждом из архивов изображения,преимущественно содержащие классифицируемый объект крупным планом,с очищенным или расфокусированным фоном,рассортированы по папкам "weapon" и "noweapon" в соответствии с классом.
 ## Подключаем библиотеки:
 """
-
-# Commented out IPython magic to ensure Python compatibility.
 import io
 import urllib.request
-import wget
 #import os
 import numpy as np
 import tensorflow as tf
@@ -33,6 +30,8 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 import matplotlib.pyplot as plt
+from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
+
 
 
 """## Конструируем функцию предобработки"""
@@ -50,17 +49,22 @@ img_s = (224, 224)
 batch_s = 128
 
 
-"""# Использование нейронной сети для распознавания изображений"""
-"""## Загружаем предобученную модель"""
+
+"""##Загружаем обученную на датасете модель и проверяем качество обучения на тестовом наборе данных"""
+
 
 url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
 mkdir /Models
 urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
 unzip -q /Models/ml_engineering_weapon_and_no.zip
 
+
 def load_trained_model():
     model = load_model("/Models/ml_engineering_weapon_and_no")
     return model
+
+
+"""# Использование нейронной сети для распознавания изображений"""
 
 
 model = load_trained_model()

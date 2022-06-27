@@ -17,6 +17,7 @@ def preprocess_image(img):
     x = preprocess_input(x)
     return x
 
+
 def load_trained_model():
     model = load_model("/content/Models/ml_engineering_weapon_and_no")
     return model
@@ -41,4 +42,3 @@ def test_weapon_image():
     x = preprocess_image(img)
     pred = model.predict(x)
     assert pred > 0.9
-
