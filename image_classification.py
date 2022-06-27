@@ -16,10 +16,8 @@ Original file is located at
 Архивы [Обучение] (train.zip) и [Тест] (test.zip) содержат все изображения, используемые для обучения и тестирования.В каждом из архивов изображения,преимущественно содержащие классифицируемый объект крупным планом,с очищенным или расфокусированным фоном,рассортированы по папкам "weapon" и "noweapon" в соответствии с классом.
 ## Подключаем библиотеки:
 """
-
-# Commented out IPython magic to ensure Python compatibility.
 import io
-import wget
+import urllib.request
 #import os
 import numpy as np
 import tensorflow as tf
@@ -33,14 +31,9 @@ from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 import matplotlib.pyplot as plt
+from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 
-"""## Загружаем датасеты """
 
-wget https://www.dropbox.com/s/dsltirre6hu724g/train.zip
-wget https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip
-
-unzip -q train.zip
-unzip -q test.zip
 
 """## Конструируем функцию предобработки"""
 
@@ -57,108 +50,28 @@ img_s = (224, 224)
 batch_s = 128
 
 
-"""## Смотрим примеры картинок:"""
 
-img_path = '/train/weapon/File 1016.jpg'
-img = image.load_img(img_path, target_size=trg_s)
-plt.imshow(img)
-plt.show()
-
-"""## Создаем наборы данных
-Набор данных для обучения
-"""
-
-train_dataset = image_dataset_from_directory('train',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
-class_names = train_dataset.class_names
-
-class_names
-
-"""Набор данных для тестирования"""
-
-test_dataset = image_dataset_from_directory('test',
-                                             batch_size=batch_s,
-                                             image_size=img_s)
-
-"""## Создаем составную нейронную сеть"""
-
-img_augmentation = Sequential(
-    [
-        layers.RandomRotation(factor=0.15),
-        layers.RandomTranslation(height_factor=0.1, width_factor=0.1),
-        layers.RandomFlip(),
-        layers.RandomContrast(factor=0.1),
-    ],
-    name="img_augmentation",
-)
-
-inputs = layers.Input(shape=(224, 224, 3))
-x = img_augmentation(inputs)
-model = EfficientNetB0(include_top=False, input_tensor=x, weights="imagenet")
-
-# Freeze the pretrained weights
-model.trainable = False
-
-# Rebuild top
-x = layers.GlobalAveragePooling2D(name="avg_pool")(model.output)
-x = layers.BatchNormalization()(x)
-
-top_dropout_rate = 0.2
-x = layers.Dropout(top_dropout_rate, name="top_dropout")(x)
-# Для задачи с двумя классами изображений
-outputs = layers.Dense(1, activation="sigmoid", name="pred")(x)
-# Для задачи с несколькими классами изображений
-# num_classes = 3 # Задаем количество классов
-# outputs = layers.Dense(num_classes, activation="softmax", name="pred")(x)
-model = tf.keras.Model(inputs, outputs, name="EfficientNet")
-
-"""Компилируем составную нейронную сеть"""
-
-# Для задачи с двумя классами изображений
-model.compile(loss='binary_crossentropy',
-              optimizer='adam', 
-              metrics=['accuracy'])
-# Для задачи с несколькими классами изображений
-# model.compile(loss='categorical_crossentropy',
-#              optimizer='adam', 
-#              metrics=['accuracy'])
-
-"""## Обучаем сеть"""
-
-history = model.fit(train_dataset,
-                    epochs=10)
-
-"""##Загружаем модель и проверяем качество обучения на тестовом наборе данных"""
+"""##Загружаем обученную на датасете модель и проверяем качество обучения на тестовом наборе данных"""
 
 
-
-model = load_model("/Models/ml_engineering_weapon_and_no")
-
-scores = model.evaluate(test_dataset, verbose=1)
-
-
-print("Доля верных ответов на тестовых данных, в процентах:", round(scores[1] * 100, 4))
+url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
+mkdir /Models
+urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
+unzip -q /Models/ml_engineering_weapon_and_no.zip
 
 
-"""## Сохраняем модель"""
+def load_trained_model():
+    model = load_model("/Models/ml_engineering_weapon_and_no")
+    return model
 
 
-#model.save("/Models/ml_engineering_weapon_and_no")
+"""# Использование нейронной сети для распознавания изображений"""
 
 
-"""### Определим функцию для последующей загрузки модели"""
-
-#def load_model():
-    #model = load_model("/Models/ml_engineering_weapon_and_no")
-    #return model
+model = load_trained_model()
 
 
-"""## Использование нейронной сети для распознавания изображений"""
-
-
-"""Загружаем изображение из файла в StreamLit"""
+"""##Загружаем изображение из файла в StreamLit"""
 
 
 def load_image():
@@ -172,9 +85,6 @@ def load_image():
 
 
 """##Запускаем предобработку и распознавание"""
-
-
-#model = load_model()
 
 
 st.title('**Классификация оружия на изображении**')
