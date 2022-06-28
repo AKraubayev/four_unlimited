@@ -17,12 +17,7 @@ def preprocess_image(img):
     return x
 
 
-def load_trained_model():
-    model = load_model("Models/ml_engineering_weapon_and_no")
-    return model
-
-
-model = load_trained_model()
+model = load_model("Models/ml_engineering_weapon_and_no/")
 
 
 def test_civilian_image():
