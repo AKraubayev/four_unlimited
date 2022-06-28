@@ -17,9 +17,6 @@ Original file is located at
 ## Подключаем библиотеки:
 """
 import io
-#import urllib.request
-#import zipfile
-#import os
 import numpy as np
 import tensorflow as tf
 import streamlit as st
@@ -55,15 +52,6 @@ batch_s = 128
 """## Загружаем обученную на датасете модель"""
 
 
-#url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
-
-
-#os.mkdir('Models/', mode=777)
-#urllib.request.urlretrieve(url, 'ml_engineering_weapon_and_no.zip')
-#with zipfile.ZipFile('ml_engineering_weapon_and_no.zip', 'w') as zip_ref:
-    #zip_ref.extractall('Models/ml_engineering_weapon_and_no')
-    
-
 def load_trained_model():
     model = load_model("Models/ml_engineering_weapon_and_no")
     return model
@@ -75,7 +63,7 @@ def load_trained_model():
 model = load_trained_model()
 
 
-"""##Загружаем изображение из файла в StreamLit"""
+"""## Загружаем изображение из файла в StreamLit"""
 
 
 def load_image():
@@ -88,7 +76,7 @@ def load_image():
         return None
 
 
-"""##Запускаем предобработку и распознавание"""
+"""## Запускаем предобработку и распознавание"""
 
 
 st.title('**Классификация оружия на изображении**')
@@ -101,7 +89,7 @@ def print_percent(t):
            }[1] + "%"
 
 
-"""Печатаем результаты распознавания"""
+"""## Печатаем результаты распознавания"""
 
 
 if result:
@@ -113,4 +101,4 @@ if result:
         x == 0.5: "Не определено",
         x  < 0.5 : "Это НЕ оружие"
           }[1]
-    st.write('**Результаты распознавания: \n **',sub + ", с вероятностью: " + print_percent(x))
+    st.write('Результаты распознавания: \n ',sub + ", с вероятностью: " + print_percent(x))
