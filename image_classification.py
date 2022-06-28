@@ -18,6 +18,7 @@ Original file is located at
 """
 import io
 import urllib.request
+import zipfile
 #import os
 import numpy as np
 import tensorflow as tf
@@ -55,10 +56,11 @@ batch_s = 128
 
 
 url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
-mkdir /Models
-urllib.request.urlretrieve(url, '/Models/ml_engineering_weapon_and_no.zip')
-unzip -q /Models/ml_engineering_weapon_and_no.zip
-
+os.mkdir('/Models', mode=0o777,*,dir_fd=None)
+urllib.request.urlretrieve(url, '/ml_engineering_weapon_and_no.zip')
+with zipfile.ZipFile('/ml_engineering_weapon_and_no.zip', 'r') as zip_ref:
+    zip_ref.extractall('Models/ml_engineering_weapon_and_no')
+    
 
 def load_trained_model():
     model = load_model("/Models/ml_engineering_weapon_and_no")
