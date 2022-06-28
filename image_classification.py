@@ -18,17 +18,11 @@ Original file is located at
 """
 import io
 import numpy as np
-import tensorflow as tf
 import streamlit as st
 from PIL import Image
-from tensorflow.keras import layers
-from tensorflow.keras import utils
-from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.preprocessing import image_dataset_from_directory
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
-
+from tensorflow.keras.models import load_model
+from tensorflow.keras.applications.efficientnet import preprocess_input
 
 ## Конструируем функцию предобработки
 
