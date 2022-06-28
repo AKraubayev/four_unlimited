@@ -13,24 +13,20 @@ Original file is located at
 Размер тестового набора: 365 изображений (допустимо несколько изображений предмета), из них 95 изображения пренадлежат к классу "не оружие", расположены в папке test\noweapon и 300, к классу "оружие",расположены в папке test\weapon
 Количество классов: 2 (оружие и не оружие, в коде: "weapon" и "noweapon" , соответственно).
 ## Структура репозитория ##
-Архивы [Обучение] (train.zip) и [Тест] (test.zip) содержат все изображения, используемые для обучения и тестирования.В каждом из архивов изображения,преимущественно содержащие классифицируемый объект крупным планом,с очищенным или расфокусированным фоном,рассортированы по папкам "weapon" и "noweapon" в соответствии с классом.
+Архивы [Обучение](https://www.dropbox.com/s/dsltirre6hu724g/train.zip/ "Обучение") (train.zip) и [Тест](https://www.dropbox.com/s/tuyavsee0i6oqhy/test.zip/ "Валидация") (test.zip) содержат все изображения, используемые для обучения и тестирования.В каждом из архивов изображения,преимущественно содержащие классифицируемый объект крупным планом,с очищенным или расфокусированным фоном,рассортированы по папкам "weapon" и "noweapon" в соответствии с классом.
 ## Подключаем библиотеки:
 """
 import io
 import numpy as np
-import tensorflow as tf
 import streamlit as st
 from PIL import Image
-from tensorflow.keras import layers
-from tensorflow.keras import utils
-from tensorflow.keras.applications import EfficientNetB0
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.preprocessing import image_dataset_from_directory
-from tensorflow.keras.models import Sequential, load_model
-from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
+from tensorflow.keras.models import load_model
+from tensorflow.keras.applications.efficientnet import preprocess_input
 
 
 ## Конструируем функцию предобработки
+
 
 def preprocess_image(img):
     img = img.resize((224, 224))
@@ -46,7 +42,7 @@ batch_s = 128
 
 
 
-"""## Загружаем обученную на датасете модель """
+"""## Загружаем обученную на [датасете:](https://drive.google.com/file/d/1NQLIVHfuIRIkM4PDhWL7PNQlveojT3wg/view?usp=sharing) [модель](https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip/ "Cсылка на dropbox")"""
 
 url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
 
