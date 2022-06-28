@@ -28,12 +28,9 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
-import matplotlib.pyplot as plt
-from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 
 
-
-"""## Конструируем функцию предобработки"""
+## Конструируем функцию предобработки
 
 def preprocess_image(img):
     img = img.resize((224, 224))
@@ -49,7 +46,9 @@ batch_s = 128
 
 
 
-"""## Загружаем обученную на датасете модель"""
+"""## Загружаем обученную на датасете модель """
+
+url = 'https://www.dropbox.com/s/ni9567tj2x2r5b6/ml_engineering_weapon_and_no.zip'
 
 
 def load_trained_model():
@@ -59,9 +58,7 @@ def load_trained_model():
 
 """# Использование нейронной сети для распознавания изображений"""
 
-
 model = load_trained_model()
-
 
 """## Загружаем изображение из файла в StreamLit"""
 
@@ -80,16 +77,20 @@ def load_image():
 
 
 st.title('**Классификация оружия на изображении**')
+
+"""### Просмотр загруженного примера"""
+
+
 img = load_image()
 result = st.button('Распознать изображение')
 def print_percent(t):
     return {
                t >= 0.5: str(round(t, 4) * 100),
                t < 0.5: str(round(1 - t, 4) * 100),
-           }[1] + "%"
+           }[1] + " %"
 
 
-"""## Печатаем результаты распознавания"""
+"""### Печатаем результаты распознавания"""
 
 
 if result:
@@ -101,4 +102,4 @@ if result:
         x == 0.5: "Не определено",
         x  < 0.5 : "Это НЕ оружие"
           }[1]
-    st.write('Результаты распознавания: \n ',sub + ", с вероятностью: " + print_percent(x))
+    st.write('Результаты распознавания: \n ',sub + ",  с вероятностью:  " + print_percent(x))
