@@ -34,7 +34,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.efficientnet import preprocess_input
 
-## Конструируем функцию предобработки
+##Конструируем функцию предобработки
 
 def preprocess_image(img):
     img = img.resize((224, 224))
