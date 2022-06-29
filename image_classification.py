@@ -102,5 +102,5 @@ if result:
     
 
 """### Андрей Владимирович, ваша оценка:"""
-level = st.slider( "Пожалуйста выберите:" , 3 , 5 )
-st.text('Команде: {}' . format (level))
+level = st.slider("Пожалуйста выберите:",3,5)
+st.text('Команде: {}'.format(level))
