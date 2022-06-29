@@ -77,6 +77,7 @@ st.title('**Классификация оружия на изображении*
 
 img = load_image()
 result = st.button('Распознать изображение')
+"""### Просмотр загруженного примера"""
 def print_percent(t):
     return {
                t >= 0.5: str(round(t, 4) * 100),
@@ -99,5 +100,7 @@ if result:
     st.write('Результаты распознавания: \n ',sub + ",  с вероятностью:  " + print_percent(x))
     
     
-level = st.slider( "Андрей Владимирович, ВАША ОЦЕНКА:" , 1 , 5 )
-st.text( 'Команде: {}' . format (level))
+
+"""### Андрей Владимировия, ваша оценка:"""
+level = st.slider( "Пожалуйста выберите:" , 3 , 5 )
+st.text('Команде: {}' . format (level))
